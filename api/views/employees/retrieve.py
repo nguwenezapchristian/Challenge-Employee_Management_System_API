@@ -22,14 +22,14 @@ class RetrieveEmployeeView(APIView):
         try:
             # Try to find by UUID first, then by employee_id
             query = Q(id=employee_id) if len(employee_id) > 10 else Q(employee_id=employee_id)
-            employee = Employee.objects.get(query)
+            employee = Employee.objects.get(query, is_active=True)
             
             return create_response(
                 data=EmployeeSerializer(employee).data,
                 message="Employee retrieved successfully"
             )
         except Employee.DoesNotExist:
-            raise ResourceNotFound("Employee not found")
+            raise ResourceNotFound(f"Employee with an id=({employee_id}) not found")
 
 class ListEmployeesView(APIView):
     permission_classes = [AllowAny]
@@ -49,7 +49,8 @@ class ListEmployeesView(APIView):
         queryset = Employee.objects.filter(
             Q(name__icontains=search_query) |
             Q(email__icontains=search_query) |
-            Q(employee_id__icontains=search_query)
+            Q(employee_id__icontains=search_query) &
+            Q(is_active=True)
         )
 
         # Check if there are matching results
