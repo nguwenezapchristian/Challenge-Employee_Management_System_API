@@ -23,7 +23,7 @@ class DeleteEmployeeView(APIView):
                 employee.user.save()
             
             return create_response(
-                message="Employee deleted successfully",
+                message=f"Employee {employee_id} deleted successfully",
                 status_code=status.HTTP_204_NO_CONTENT
             )
         except Employee.DoesNotExist:
