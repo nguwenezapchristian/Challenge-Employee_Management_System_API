@@ -78,8 +78,7 @@ The Employee Management System API is designed to handle essential tasks for man
       "name": "John Doe",
       "email": "johndoe@example.com",
       "phone_number": "+12345678901",
-      "password": "securePassword123!",
-      "confirm_password": "securePassword123!"
+      "password": "securePassword123!"
     }
     ```
 
