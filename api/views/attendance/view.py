@@ -12,8 +12,7 @@ class ViewAttendanceView(APIView):
     permission_classes = [AllowAny]
 
     @handle_exceptions
-    def get(self, request):
-        employee_id = request.data.get("employee_id")
+    def get(self, request, employee_id):
         employee = get_object_or_404(Employee, employee_id=employee_id)
         attendances = Attendance.objects.filter(employee=employee)
 
