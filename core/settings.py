@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+
+# load environment
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -158,3 +164,9 @@ SIMPLE_JWT = {
 
 # Email Backend (Assuming you're using a console backend for testing)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Email Config( Using postmark)
+# settings.py
+
+POSTMARK_API_TOKEN = os.getenv("POSTMARK_API_TOKEN")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
