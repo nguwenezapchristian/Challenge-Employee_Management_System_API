@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from authentication.models import BlacklistedToken
-from authentication.serializers import LogoutSerializer
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
@@ -22,6 +21,4 @@ class LogoutView(APIView):
         # Blacklist the token
         BlacklistedToken.objects.create(token=token)
 
-        # Serialize response
-        serializer = LogoutSerializer()
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({"Status": "Logout successful."}, status=status.HTTP_200_OK)

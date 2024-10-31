@@ -84,7 +84,7 @@ The Employee Management System API is designed to handle essential tasks for man
     ```
 
 #### **GET** - Retrieve an Employee
-- **URL**: `http://127.0.0.1:8000/api/employees/EMP001`
+- **URL**: `http://127.0.0.1:8000/api/employees/EMP001/`
 - **Description**: Retrieve details of a specific employee by their ID.
 
 #### **PUT** - Update Employee Data
@@ -106,34 +106,16 @@ The Employee Management System API is designed to handle essential tasks for man
 ### **Attendance Management**
 
 #### **POST** - Check-In
-- **URL**: `http://127.0.0.1:8000/api/attendance/check-in/`
+- **URL**: `http://127.0.0.1:8000/api/attendance/check-in/EMP001/`
 - **Description**: Record the time an employee arrives at the office.
-- **Request Body**:
-    ```json
-    {
-      "employee_id": "EMP001"
-    }
-    ```
 
 #### **POST** - Check-Out
-- **URL**: `http://127.0.0.1:8000/api/attendance/check-out/`
+- **URL**: `http://127.0.0.1:8000/api/attendance/check-out/EMP001/`
 - **Description**: Record the time an employee leaves the office.
-- **Request Body**:
-    ```json
-    {
-      "employee_id": "EMP001"
-    }
-    ```
 
 #### **GET** - View Attendance
-- **URL**: `http://127.0.0.1:8000/api/attendance/view/`
+- **URL**: `http://127.0.0.1:8000/api/attendance/view/EMP001/`
 - **Description**: Retrieve all attendance records for a specific employee, with optional filtering by date range.
-- **Request Body**:
-    ```json
-    {
-      "employee_id": "EMP001"
-    }
-    ```
 
 #### **GET** - Attendance PDF Report
 - **URL**: `http://127.0.0.1:8000/api/attendance/report/pdf/`
@@ -171,13 +153,7 @@ The Employee Management System API is designed to handle essential tasks for man
 
 #### **POST** - Logout
 - **URL**: `http://127.0.0.1:8000/api/auth/logout/`
-- **Request Body**:
-    ```json
-    {
-      "username": "admin3",
-      "password": "Admin123!"
-    }
-    ```
+- **Authorization Header**: Provide the access token got from Login in Authorization using Bearer Token
 
 ---
 
