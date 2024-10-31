@@ -11,6 +11,7 @@ The Employee Management System API is designed to handle essential tasks for man
 4. [API Documentation](#api-documentation)
     - [Employee Management](#employee-management)
     - [Attendance Management](#attendance-management)
+    - [Attendance Report](#attendance-report)
     - [Authentication](#authentication)
 
 ---
@@ -117,6 +118,10 @@ The Employee Management System API is designed to handle essential tasks for man
 - **URL**: `http://127.0.0.1:8000/api/attendance/view/EMP001/`
 - **Description**: Retrieve all attendance records for a specific employee, with optional filtering by date range.
 
+---
+
+### **Attendance Report**
+
 #### **GET** - Attendance PDF Report
 - **URL**: `http://127.0.0.1:8000/api/attendance/report/pdf/`
 - **Description**: Generate and download the PDF version of the daily attendance report.
@@ -155,9 +160,26 @@ The Employee Management System API is designed to handle essential tasks for man
 - **URL**: `http://127.0.0.1:8000/api/auth/logout/`
 - **Authorization Header**: Provide the access token got from Login in Authorization using Bearer Token
 
+#### **POST** - Forgot Password
+- **URL**: `http://127.0.0.1:8000/api/auth/forgot-password/`
+- **Request Body**:
+    ```json
+    {
+      "email": "pierre@nguweneza.tech"
+    }
+- **Description**: After sending the request, the email is sent with the link to reset the password.
+
+#### **POST** - Reset Password
+- **URL**: `http://127.0.0.1:8000/api/auth/reset-password/c3da51f2-0d74-4033-acf0-6f8fb746188b/`
+- **Request Body**:
+    ```json
+    {
+      "new_password": "Admin123!!"
+    }
+- **Description**: Receive an email which contains the link to reset the password.
+
 ---
 
 ## **Pending Tasks**
 
-1. **Authentication**: Implement full authentication flows, including JWT or session management.
-2. **Email Notifications with Queues**: Set up email notifications for employee actions (e.g., registration, attendance checks).
+1. **Email Notifications with Queues**: Set up email notifications for employee actions (e.g., registration, attendance checks).
