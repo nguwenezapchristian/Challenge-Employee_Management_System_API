@@ -1,82 +1,71 @@
-# Employee Management System API (Development Documentation)
+# Employee Management API (V1)
 
-## Overview
 
-The Employee Management System API is designed to handle essential tasks for managing employees, attendance, and attendance reporting. This Django-based API includes several key modules and features that support efficient employee and attendance tracking. During development, SQLite is used as the database backend for ease of setup and prototyping. 
 
-### Key Features
-- **Employee Management**: CRUD operations for employee profiles and details.
-- **Attendance Management**: Tracking employee attendance with timestamped records.
-- **Attendance Reporting**: Generating reports on attendance data.
-- **API Documentation**: Detailed documentation of all endpoints.
-
-### Pending Tasks
-1. **Authentication**: Secure access and token-based authentication need to be completed.
-2. **Email Notifications and Queue**: Implement automated email notifications for specific events.
-
-### Project Structure
-
-```plaintext
-.
-├── api
-│   ├── admin.py
-│   ├── apps.py
-│   ├── __init__.py
-│   ├── migrations
-│   ├── models.py
-│   ├── tests.py
-│   ├── urls_ft
-│   │   ├── attendance.py
-│   │   ├── authentication.py
-│   │   └── employees.py
-│   ├── urls.py
-│   └── views
-│       ├── attendance
-│       ├── authentication
-│       └── employees
-├── attendance
-│   ├── models.py
-│   ├── views.py
-├── authentication
-│   ├── serializers.py
-│   ├── views.py
-├── base
-│   ├── permissions.py
-│   ├── utils
-│   │   ├── decorators.py
-│   │   ├── exceptions.py
-│   │   └── response_utils.py
-├── core
-│   ├── settings.py
-│   ├── urls.py
-├── employees
-│   ├── serializers.py
-│   ├── services
-│   │   └── employee_service.py
-│   ├── views.py
-├── db.sqlite3
-├── manage.py
-└── requirements.txt
-```
+## Table of Contents
+1. [Environment Setup](#environment-setup)
+2. [Installation](#installation)
+3. [Running Migrations](#running-migrations)
+4. [API Documentation](#api-documentation)
+    - [Employee Management](#employee-management)
+    - [Attendance Management](#attendance-management)
+    - [Authentication](#authentication)
 
 ---
 
-# API Documentation
+## **Environment Setup**
 
-## Base URL
-```plaintext
-http://127.0.0.1:8000/api/
-```
+1. **Clone the Repository**:
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+   ```
+
+2. **Set Up a Virtual Environment**:
+   ```bash
+   python3 -m venv env
+   source env/bin/activate
+   ```
 
 ---
+
+## **Installation**
+
+1. **Install Project Requirements**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## **Running Migrations**
+
+1. **Apply Migrations**:
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+2. **Create a Superuser (optional)**:
+   - For access to the admin dashboard and testing purposes.
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+3. **Run the Server**:
+   ```bash
+   python manage.py runserver
+   ```
+
+---
+
+## **API Documentation**
 
 ### **Employee Management**
 
 #### **GET** - List All Employees
 - **URL**: `http://127.0.0.1:8000/api/employees/`
 - **Description**: Retrieve a list of all employees.
-
----
 
 #### **POST** - Create an Employee
 - **URL**: `http://127.0.0.1:8000/api/employees/create/`
@@ -92,13 +81,9 @@ http://127.0.0.1:8000/api/
     }
     ```
 
----
-
 #### **GET** - Retrieve an Employee
 - **URL**: `http://127.0.0.1:8000/api/employees/EMP001`
 - **Description**: Retrieve details of a specific employee by their ID.
-
----
 
 #### **PUT** - Update Employee Data
 - **URL**: `http://127.0.0.1:8000/api/employees/EMP001/update/`
@@ -109,8 +94,6 @@ http://127.0.0.1:8000/api/
       "name": "Johnathan Doe"
     }
     ```
-
----
 
 #### **DELETE** - Delete an Employee
 - **URL**: `http://127.0.0.1:8000/api/employees/EMP001/delete/`
@@ -130,8 +113,6 @@ http://127.0.0.1:8000/api/
     }
     ```
 
----
-
 #### **POST** - Check-Out
 - **URL**: `http://127.0.0.1:8000/api/attendance/check-out/`
 - **Description**: Record the time an employee leaves the office.
@@ -141,8 +122,6 @@ http://127.0.0.1:8000/api/
       "employee_id": "EMP001"
     }
     ```
-
----
 
 #### **GET** - View Attendance
 - **URL**: `http://127.0.0.1:8000/api/attendance/view/`
@@ -154,13 +133,9 @@ http://127.0.0.1:8000/api/
     }
     ```
 
----
-
 #### **GET** - Attendance PDF Report
 - **URL**: `http://127.0.0.1:8000/api/attendance/report/pdf/`
 - **Description**: Generate and download the PDF version of the daily attendance report.
-
----
 
 #### **GET** - Attendance Excel Report
 - **URL**: `http://127.0.0.1:8000/api/attendance/report/excel/`
@@ -182,8 +157,6 @@ http://127.0.0.1:8000/api/
     }
     ```
 
----
-
 #### **POST** - Login
 - **URL**: `http://127.0.0.1:8000/api/auth/login/`
 - **Request Body**:
@@ -193,8 +166,6 @@ http://127.0.0.1:8000/api/
       "password": "Admin123!"
     }
     ```
-
----
 
 #### **POST** - Logout
 - **URL**: `http://127.0.0.1:8000/api/auth/logout/`
@@ -208,24 +179,7 @@ http://127.0.0.1:8000/api/
 
 ---
 
-### Pending Endpoint Details
+## **Pending Tasks**
 
-#### 4. **Authentication**
-
-- **Endpoint**: `POST /auth/login/`
-- **Description**: Authenticates a user and returns a token.
-- **Status**: **Pending** - Authentication logic and JWT token generation need to be finalized.
-
-#### 5. **Email Notifications and Queue**
-
-- **Functionality**: Implement automated emails for specific events, such as new employee registration or missed attendance alerts.
-- **Status**: **Pending** - Email server configuration and notification trigger points need to be set up.
----
-
-### Development Database
-
-For this development phase, SQLite is used as the database backend (`db.sqlite3`). It provides simplicity and requires minimal setup, making it ideal for local testing and development.
-
-### Testing
-
-All endpoints related to Employee Management, Attendance Management, and Attendance Reporting have been tested using Postman and confirmed to be working as expected.
+1. **Authentication**: Implement full authentication flows, including JWT or session management.
+2. **Email Notifications with Queues**: Set up email notifications for employee actions (e.g., registration, attendance checks).
