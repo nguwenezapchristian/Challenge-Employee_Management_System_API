@@ -83,7 +83,7 @@ The Employee Management System API is designed to handle essential tasks for man
     ```
 
 #### **GET** - Retrieve an Employee
-- **URL**: `http://127.0.0.1:8000/api/employees/EMP001`
+- **URL**: `http://127.0.0.1:8000/api/employees/EMP001/`
 - **Description**: Retrieve details of a specific employee by their ID.
 
 #### **PUT** - Update Employee Data
