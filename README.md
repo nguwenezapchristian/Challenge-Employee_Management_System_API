@@ -181,5 +181,4 @@ The Employee Management System API is designed to handle essential tasks for man
 
 ## **Pending Tasks**
 
-ft-authentication
 1. **Email Notifications with Queues**: Set up email notifications for employee actions (e.g., registration, attendance checks).
