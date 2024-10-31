@@ -24,10 +24,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-class LogoutSerializer(serializers.Serializer):
-    message = serializers.CharField(default='Logout successful.')
-
-
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
     password = serializers.CharField(write_only=True, required=True)
