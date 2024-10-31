@@ -6,10 +6,12 @@ from base.utils.decorators import handle_exceptions
 from django.utils import timezone
 import uuid
 from authentication.models import User
+from base.utils.email_service import EmailService
 
 
 class ForgotPasswordView(APIView):
     permission_classes = [AllowAny]
+    email_service = EmailService()  # Create an instance of the email service
 
     @handle_exceptions
     def post(self, request):
@@ -22,7 +24,15 @@ class ForgotPasswordView(APIView):
                 token = str(uuid.uuid4())
                 expires_at = timezone.now() + timezone.timedelta(hours=1)
                 PasswordReset.objects.create(user=user, token=token, expires_at=expires_at)
-                # Send email with token (implementation of email sending is not covered)
+                
+                # Send password reset email
+                reset_link = f"{request.scheme}://{request.get_host()}/reset-password/{token}/"
+                subject = "Password Reset Request"
+                text_body = f"Hi {user.username},\n\nTo reset your password, use the following link:\n{reset_link}\n\nThis link will expire in 1 hour."
+                html_body = f"<p>Hi {user.username},</p><p>To reset your password, use the following link: <a href='{reset_link}'>Reset Password</a>.</p><p>This link will expire in 1 hour.</p>"
+
+                self.email_service.send_email(email, subject, text_body, html_body)
+                
                 return create_response(message="Password reset email sent.")
             return error_response("Email not found", status_code=404)
         return error_response(serializer.errors)
