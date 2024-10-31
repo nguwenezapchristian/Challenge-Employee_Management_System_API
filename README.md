@@ -153,13 +153,7 @@ The Employee Management System API is designed to handle essential tasks for man
 
 #### **POST** - Logout
 - **URL**: `http://127.0.0.1:8000/api/auth/logout/`
-- **Request Body**:
-    ```json
-    {
-      "username": "admin3",
-      "password": "Admin123!"
-    }
-    ```
+- **Authorization Header**: Provide the access token got from Login in Authorization using Bearer Token
 
 ---
 
