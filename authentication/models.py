@@ -42,3 +42,10 @@ class PasswordReset(BaseModel):
     class Meta:
         db_table = 'password_resets'
 
+class BlacklistedToken(models.Model):
+    token = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.token
+
