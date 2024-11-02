@@ -7,6 +7,7 @@ from attendance.models import Attendance
 from employees.models import Employee
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
+from base.utils.tasks import send_email_task
 
 class CheckOutView(APIView):
     # permission_classes = [IsAuthenticated]
@@ -25,6 +26,13 @@ class CheckOutView(APIView):
 
         attendance.check_out_time = timezone.now()
         attendance.save()
+
+        # send email notification to employee
+        subject = "Attendance Check-Out"
+        text_body = f"Hi {employee.name},\n\nYou've checked out at {timezone.now().strftime('%Y-%m-%d %H:%M:%S')}.\n\nYour attendance record has been updated."
+        html_body = f"<p>Hi {employee.name},</p><p>You've checked out at {timezone.now().strftime('%Y-%m-%d %H:%M:%S')}. Your attendance record has been updated.</p>"
+
+        send_email_task.delay(employee.email, subject, text_body, html_body)
 
         return create_response(
             data={'check_out_time': attendance.check_out_time},
