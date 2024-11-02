@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
+from celery import Celery
 from dotenv import load_dotenv
 import os
 
@@ -166,7 +167,16 @@ SIMPLE_JWT = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Email Config( Using postmark)
-# settings.py
 
 POSTMARK_API_TOKEN = os.getenv("POSTMARK_API_TOKEN")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+
+# celery Config
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
+
+app = Celery('core')
+app.config_from_object('django.conf:settings', namespace='CELERY')
+app.autodiscover_tasks()
