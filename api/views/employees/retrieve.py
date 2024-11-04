@@ -59,7 +59,7 @@ class ListEmployeesView(APIView):
                 success=False,
                 message="Employee not found",
                 data=None,
-                status=status.HTTP_404_NOT_FOUND
+                status_code=status.HTTP_404_NOT_FOUND
             )
 
         # Pagination
