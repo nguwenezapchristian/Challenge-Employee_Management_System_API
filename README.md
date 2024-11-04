@@ -198,8 +198,3 @@ This command initiates the Celery worker, which will process email notification 
 - **Description**: Receive an email containing the link to reset the password.
 
 ---
-
-## **Pending Tasks**
-
-ft-authentication
-1. **Email Notifications with Queues**: Set up email notifications for employee actions (e.g., registration, attendance checks).
