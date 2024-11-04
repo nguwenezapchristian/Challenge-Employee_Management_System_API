@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework import status
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from base.permissions import IsAdminUser
 from base.utils.decorators import handle_exceptions
 from base.utils.response_utils import create_response
 from employees.serializers import EmployeeCreateSerializer, EmployeeSerializer
@@ -9,7 +10,7 @@ from authentication.models import User
 from django.db import transaction
 
 class CreateEmployeeView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated, IsAdminUser]
     queryset = Employee.objects.all()
 
     @handle_exceptions
