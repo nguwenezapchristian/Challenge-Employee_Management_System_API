@@ -8,7 +8,8 @@ The Employee Management System API is designed to handle essential tasks for man
 1. [Environment Setup](#environment-setup)
 2. [Installation](#installation)
 3. [Running Migrations](#running-migrations)
-4. [API Documentation](#api-documentation)
+4. [Running Redis and Celery](#running-redis-and-celery)
+5. [API Documentation](#api-documentation)
     - [Employee Management](#employee-management)
     - [Attendance Management](#attendance-management)
     - [Attendance Report](#attendance-report)
@@ -62,6 +63,23 @@ The Employee Management System API is designed to handle essential tasks for man
 
 ---
 
+## **Running Redis and Celery**
+
+### Step 1: Start Redis Server
+To enable message queues for email notifications, Redis must be running as the broker for Celery. Start the Redis server with:
+   ```bash
+   redis-server
+   ```
+
+### Step 2: Start Celery Worker
+With Redis running, start the Celery worker for the application:
+   ```bash
+   celery -A core worker --loglevel=info
+   ```
+This command initiates the Celery worker, which will process email notification tasks and other background jobs.
+
+---
+
 ## **API Documentation**
 
 ### **Employee Management**
@@ -106,12 +124,12 @@ The Employee Management System API is designed to handle essential tasks for man
 ### **Attendance Management**
 
 #### **POST** - Check-In
-- **URL**: `http://127.0.0.1:8000/api/attendance/check-in/EMP001/`
-- **Description**: Record the time an employee arrives at the office.
+- **URL**: `http://127.0.0.1:8000/api/attendance/check-in/EMP004/`
+- **Description**: Record the time an employee arrives at the office and sends the email notifying them.
 
 #### **POST** - Check-Out
-- **URL**: `http://127.0.0.1:8000/api/attendance/check-out/EMP001/`
-- **Description**: Record the time an employee leaves the office.
+- **URL**: `http://127.0.0.1:8000/api/attendance/check-out/EMP004/`
+- **Description**: Record the time an employee leaves the office and sends the email notifying them.
 
 #### **GET** - View Attendance
 - **URL**: `http://127.0.0.1:8000/api/attendance/view/EMP001/`
@@ -166,6 +184,7 @@ The Employee Management System API is designed to handle essential tasks for man
     {
       "email": "pierre@nguweneza.tech"
     }
+    ```
 - **Description**: After sending the request, the email is sent with the link to reset the password.
 
 #### **POST** - Reset Password
@@ -175,10 +194,12 @@ The Employee Management System API is designed to handle essential tasks for man
     {
       "new_password": "Admin123!!"
     }
-- **Description**: Receive an email which contains the link to reset the password.
+    ```
+- **Description**: Receive an email containing the link to reset the password.
 
 ---
 
 ## **Pending Tasks**
 
+ft-authentication
 1. **Email Notifications with Queues**: Set up email notifications for employee actions (e.g., registration, attendance checks).

@@ -7,6 +7,7 @@ from employees.models import Employee
 from attendance.models import Attendance
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
+from base.utils.tasks import send_email_task
 
 class CheckInView(APIView):
     # permission_classes = [IsAuthenticated]
@@ -22,6 +23,13 @@ class CheckInView(APIView):
             check_out_time__isnull=True,  # Ensure there's no active checkout
         )
         attendance.save()
+
+        # Send email notification to the employee
+        subject = "Attendance Check-In"
+        text_body = f"Hi {employee.name},\n\nYou've checked in at {timezone.now().strftime('%Y-%m-%d %H:%M:%S')}.\n\nPlease make sure to check out before 12:00 PM."
+        html_body = f"<p>Hi {employee.name},</p><p>You've checked in at {timezone.now().strftime('%Y-%m-%d %H:%M:%S')}. Please make sure to check out before 12:00 PM.</p>"
+
+        send_email_task.delay(employee.email, subject, text_body, html_body)
 
         return create_response(
             data={'check_in_time': attendance.check_in_time},
