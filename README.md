@@ -31,6 +31,28 @@ The Employee Management System API is designed to handle essential tasks for man
    source env/bin/activate
    ```
 
+3. **Create a .env File**:
+- In the project’s root directory, create a new file named .env.
+
+- Add the following variables to configure your environment:
+```bash
+# Database Configuration
+POSTGRES_DATABASE=your_database_name
+POSTGRES_HOST=your_database_host
+POSTGRES_PASSWORD=your_database_password
+POSTGRES_USER=your_database_user
+
+# Production Environment
+PRODUCTION=True
+
+# Security Key
+SECRET_KEY=your_django_secret_key
+
+# Email Configuration
+POSTMARK_API_TOKEN=your_postmark_api_token
+DEFAULT_FROM_EMAIL=your_default_sender_email
+```
+
 ---
 
 ## **Installation**
