@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from api.views.welcome import WelcomeView
 
 urlpatterns = [
+    path('', WelcomeView.as_view(), name='Welcome'),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
 ]
