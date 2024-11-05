@@ -4,12 +4,15 @@
 
 The Employee Management System API is designed to handle essential tasks for managing employees, attendance, and attendance reporting. This Django-based API includes several key modules and features that support efficient employee and attendance tracking. During development, SQLite is used as the database backend for ease of setup and prototyping, If you want to use Postgres, make sure to make PRODUCTION = True in .env file.
 
+**API IS NOW LIVE!!!!! CHECK IT OUT [HERE](https://nguweneza.tech)**
+
 ## Table of Contents
 1. [Environment Setup](#environment-setup)
 2. [Installation](#installation)
 3. [Running Migrations](#running-migrations)
 4. [Running Redis and Celery](#running-redis-and-celery)
 5. [API Documentation](#api-documentation)
+    - [Swagger API Documentation](#swagger-documentation)
     - [Employee Management](#employee-management)
     - [Attendance Management](#attendance-management)
     - [Attendance Report](#attendance-report)
@@ -103,6 +106,12 @@ This command initiates the Celery worker, which will process email notification 
 ---
 
 ## **API Documentation**
+
+### **Swagger Documentation**
+
+Click [here](https://app.swaggerhub.com/apis-docs/NGUWENEZACC982/employee_management_system_api/1#/default/post_api_employees_create_) to go to the documentation.
+
+Or Use the following documentation with a live API via https://nguweneza.tech/
 
 ### **Employee Management**
 
