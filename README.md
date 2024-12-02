@@ -4,7 +4,7 @@
 
 The Employee Management System API is designed to handle essential tasks for managing employees, attendance, and attendance reporting. This Django-based API includes several key modules and features that support efficient employee and attendance tracking. During development, SQLite is used as the database backend for ease of setup and prototyping, If you want to use Postgres, make sure to make PRODUCTION = True in .env file.
 
-**API IS NOW LIVE!!!!! CHECK IT OUT [HERE](https://nguweneza.tech)**
+**API IS NOW LIVE!!!!! CHECK IT OUT [HERE](https://emp.nguweneza.tech)**
 
 ## Table of Contents
 1. [Environment Setup](#environment-setup)
